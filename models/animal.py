@@ -21,7 +21,7 @@ class Animal(db.Model):
     birthdate = db.Column(db.DateTime())
     date_aquired = db.Column(db.DateTime())
     location = db.Column(db.String(200))
-    keeper = db.Column(db.String(200))
+    keeper = db.Column(db.Integer(), db.ForeignKey("personel.id"))
 
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default = db.func.now())

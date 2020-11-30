@@ -4,10 +4,10 @@ from flask_restful import Api
 
 from Config import Config
 from extensions import db
-from models.personel import Personel
+
 from resources.facility import FacilityListResource, FacilityResource, FacilityPublishResource
 from resources.animal import AnimalListResource, AnimalResource, AnimalPublishResource
-
+from resources.personel import PersonelListResource
 
 def create_app():
     app = Flask(__name__)
@@ -24,6 +24,8 @@ def register_extensions(app):
 def register_resources(app):
 
     api = Api(app)
+
+    api.add_resource(PersonelListResource, '/personels')
 
 
     api.add_resource(FacilityListResource, '/facilities')

@@ -43,14 +43,14 @@ class AnimalResource(Resource):
         if animal is None:
             return {'message': 'animal not found'}, HTTPStatus.NOT_FOUND
 
-        animal.name = data.get('name') if data.get('name') else animal.name
-        animal.species = data.get('species') if data.get('species') else animal.species
-        animal.gender = data.get('gender') if data.get('gender') else animal.gender
-        animal.birthdate = data.get('birthdate') if data.get('birthdate') else animal.birthdate
-        animal.date_aquired = data.get('date_aquired') if data.get('date_aquired') else animal.date_aquired
-        animal.location = data.get('location') if data.get('location') else animal.location
-        animal.keeper = data.get('keeper') if data.get('keeper') else animal.keeper
-        animal.avatar_url = data.get('avatar_url') if data.get('avatar_url') else animal.avatar_url
+        animal.name = data.get('name') if 'name' in data.keys() else animal.name
+        animal.species = data.get('species') if 'species' in data.keys() else animal.species
+        animal.gender = data.get('gender') if 'gender' in data.keys() else animal.gender
+        animal.birthdate = data.get('birthdate') if 'birthdate' in data.keys() else animal.birthdate
+        animal.date_aquired = data.get('date_aquired') if 'date_aquired' in data.keys() else animal.date_aquired
+        animal.location = data.get('location') if 'location' in data.keys() else animal.location
+        animal.keeper = data.get('keeper') if 'keeper' in data.keys() else animal.keeper
+        animal.avatar_url = data.get('avatar_url') if 'avatar_url' in data.keys() else animal.avatar_url
 
         animal.save()
 

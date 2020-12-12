@@ -14,8 +14,15 @@ class AnimalListResource(Resource):
 
     def post(self):
         data = request.get_json()
-        animal = Animal(name=data['name'], species=data['species'], gender=data['gender'], birthdate=data['birthdate'],
-                        date_aquired=data['date_aquired'], location=data['location'], keeper=data['keeper'])
+        animal = Animal(name=data.get('name'),
+                        species=data.get('species'),
+                        gender=data.get('gender'),
+                        birthdate=data.get('birthdate'),
+                        date_aquired=data.get('date_aquired'),
+                        location=data.get('location'),
+                        keeper=data.get('keeper'),
+                        avatar_url=data.get('avatar_url')
+                        )
 
         animal.save()
         return animal.data, HTTPStatus.CREATED
@@ -35,14 +42,17 @@ class AnimalResource(Resource):
 
         if animal is None:
             return {'message': 'animal not found'}, HTTPStatus.NOT_FOUND
-        animal.name = data['name']
-        animal.species = data['species']
-        animal.gender = data['gender']
-        animal.birthdate = data['birthdate']
-        animal.date_aquired = data['date_aquired']
-        animal.location = data['location']
-        animal.keeper = data['keeper']
+        animal.name = data.get('name')
+        animal.species = data.get('species')
+        animal.gender = data.get('gender'),
+        animal.birthdate = data.get('birthdate'),
+        animal.date_aquired = data.get('date_aquired'),
+        animal.location = data.get('location'),
+        animal.keeper = data.get('keeper')
+        animal.avatar_url = data.get('avatar_url')
+
         animal.save()
+
         return animal.data, HTTPStatus.OK
 
 

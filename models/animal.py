@@ -11,6 +11,7 @@ class Animal(db.Model):
     date_aquired = db.Column(db.DateTime())
     location = db.Column(db.String(200))
     keeper = db.Column(db.String(200))
+    avatar_url = db.Column(db.String(300))
 
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
@@ -29,7 +30,8 @@ class Animal(db.Model):
             'birthdate': str(self.birthdate),
             'date_aquired': str(self.date_aquired),
             'location': self.location,
-            'keeper': self.keeper
+            'keeper': self.keeper,
+            'avatar_url': self.avatar_url
         }
 
     @classmethod

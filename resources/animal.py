@@ -42,14 +42,15 @@ class AnimalResource(Resource):
 
         if animal is None:
             return {'message': 'animal not found'}, HTTPStatus.NOT_FOUND
-        animal.name = data.get('name')
-        animal.species = data.get('species')
-        animal.gender = data.get('gender'),
-        animal.birthdate = data.get('birthdate'),
-        animal.date_aquired = data.get('date_aquired'),
-        animal.location = data.get('location'),
-        animal.keeper = data.get('keeper')
-        animal.avatar_url = data.get('avatar_url')
+
+        animal.name = data.get('name') if data.get('name') else animal.name
+        animal.species = data.get('species') if data.get('species') else animal.species
+        animal.gender = data.get('gender') if data.get('gender') else animal.gender
+        animal.birthdate = data.get('birthdate') if data.get('birthdate') else animal.birthdate
+        animal.date_aquired = data.get('date_aquired') if data.get('date_aquired') else animal.date_aquired
+        animal.location = data.get('location') if data.get('location') else animal.location
+        animal.keeper = data.get('keeper') if data.get('keeper') else animal.keeper
+        animal.avatar_url = data.get('avatar_url') if data.get('avatar_url') else animal.avatar_url
 
         animal.save()
 

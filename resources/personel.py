@@ -17,26 +17,24 @@ class PersonelListResource(Resource):
         if Personel.get_by_email(email):
             return {'message': 'email already used'}, HTTPStatus.BAD_REQUEST
         password = hash_password(non_hash_password)
+
+        firstname = json_data.get('firstname')
+        lastname = json_data.get('lastname')
+        phone_number = json_data.get('phone_number')
+        role = json_data.get('role')
+        avatar_url = json_data.get('avatar_url')
+
         personel = Personel(
                 username=username,
                 email=email,
-                password=password
+                password=password,
+                firstname=firstname,
+                lastname=lastname,
+                phone_number=phone_number,
+                role=role,
+                avatar_url=avatar_url
         )
 
-
-
         personel.save()
-        data = {
-                'id': personel.id,
-                'username': personel.username,
-                'email': personel.email
-        }
 
-
-
-        return data, HTTPStatus.CREATED
-
-
-
-
-
+        return personel.data, HTTPStatus.CREATED

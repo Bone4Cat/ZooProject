@@ -9,6 +9,7 @@ class Personel(db.Model):
     email = db.Column(db.String(200), nullable=False, unique=True)
     phone_number = db.Column(db.String(200))
     role = db.Column(db.String(80))
+    avatar_url = db.Column(db.String(300))
     password = db.Column(db.String(200))
     is_active = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
@@ -17,6 +18,20 @@ class Personel(db.Model):
     facilities = db.relationship('Facility', backref='personel')
 
     animals = db.relationship('Animal', backref='personel')
+
+    @property
+    def data(self):
+        return{
+            "id": self.id,
+            "username": self.username,
+            "firstname":self.firstname,
+            "lastname": self.lastname,
+            "email": self.email,
+            "phone_number": self.phone_number,
+            "role": self.role,
+            "avatar_url": self.avatar_url
+        }
+
     @classmethod
     def get_by_username(cls, username):
         return cls.query.filter_by(username=username).first()

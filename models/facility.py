@@ -7,6 +7,7 @@ class Facility(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200))
     location = db.Column(db.String(200))
+    avatar_url = db.Column(db.String(200))
 
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default = db.func.now())
@@ -22,6 +23,7 @@ class Facility(db.Model):
             'name': self.name,
             'description': self.description,
             'location': self.location,
+            'avatar_url': self.avatar_url,
         }
 
     @classmethod
@@ -29,8 +31,12 @@ class Facility(db.Model):
         return cls.query.filter_by(id=id).first()
 
     @classmethod
-    def get_all_published(cls):
-        return cls.query.filter_by(is_publish=True).all()
+    def get_all(cls):
+        return cls.query.all()
+
+    @classmethod
+    def get_by_location(cls, location):
+        return cls.query.filter_by(location=location).first()
 
     def save(self):
         db.session.add(self)
